@@ -7,7 +7,7 @@ package housingapp;
 
 /**
  *
- * @author x18100252
+ * @author kruno
  */
 public class HousingApp {
 

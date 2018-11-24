@@ -9,6 +9,9 @@ package housingapp;
  *
  * @author x18100252
  */
-public class House {
+public class House extends Property{
+    
+    
+    
     
 }

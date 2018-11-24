@@ -5,6 +5,8 @@
  */
 package housingapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author x18100252
@@ -29,6 +31,10 @@ public class HousingGUI extends javax.swing.JFrame {
 
         cmbproperty = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        cmbarea = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btngetprice = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,19 +48,48 @@ public class HousingGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Housing App");
 
+        cmbarea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6", "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11", "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17", "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" }));
+        cmbarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbareaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Property type");
+
+        jLabel3.setText("Area");
+
+        btngetprice.setText("Get average price");
+        btngetprice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngetpriceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cmbarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(61, 61, 61))
+                        .addComponent(cmbproperty, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(178, 178, 178))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btngetprice)
+                        .addGap(130, 130, 130))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,8 +97,16 @@ public class HousingGUI extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(38, 38, 38)
+                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -73,22 +116,36 @@ public class HousingGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
          if(cmbproperty.getSelectedItem().equals("House"))
         {
-             property House = new property(); 
+             Property House = new Property(); 
+             JOptionPane.showMessageDialog(null, "You are looking for a house to rent");
         }
         else
         {
-              property Apartment  = new property();
+              Property Apartment  = new Property();
+              JOptionPane.showMessageDialog(null, "You are looking for an apartment to rent");
         }
-
-                
-        
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_cmbpropertyActionPerformed
+
+    private void cmbareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbareaActionPerformed
+        // TODO add your handling code here:
+        
+        String[] Area = {"Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6",
+                     "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11",
+                     "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17",
+                     "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" };
+        
+        for(int x=0;x<24;x++){
+        if(cmbarea.getSelectedItem().equals(Area[x])){
+            JOptionPane.showMessageDialog(null,"The area you have selected is " + Area[x]);
+            break;
+        }
+        }   
+    }//GEN-LAST:event_cmbareaActionPerformed
+
+    private void btngetpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngetpriceActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btngetpriceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,7 +183,11 @@ public class HousingGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btngetprice;
+    private javax.swing.JComboBox<String> cmbarea;
     private javax.swing.JComboBox<String> cmbproperty;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

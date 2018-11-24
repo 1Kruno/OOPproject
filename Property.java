@@ -5,10 +5,43 @@
  */
 package housingapp;
 
+import java.io.Serializable;
+
 /**
  *
  * @author x18100252
  */
-public class Property {
+public class Property implements Serializable{
+   
+    int noOfBeds;
+    int noOfToilets;
+    
+    public Property(){
+        noOfBeds = 0;
+        noOfToilets = 0;
+    }
+    
+    public Property(int xnoOfBeds, int xnoOfToilets){
+        this.noOfBeds = xnoOfBeds;
+        this.noOfToilets = xnoOfToilets;
+    }
+
+    public int getNoOfBeds() {
+        return noOfBeds;
+    }
+
+    public void setNoOfBeds(int noOfBeds) {
+        this.noOfBeds = noOfBeds;
+    }
+
+    public int getNoOfToilets() {
+        return noOfToilets;
+    }
+
+    public void setNoOfToilets(int noOfToilets) {
+        this.noOfToilets = noOfToilets;
+    }
+    
+    
     
 }
