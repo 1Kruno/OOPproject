@@ -9,7 +9,7 @@ package housingapp;
  *
  * @author x18100252
  */
-public class Housing {
+public class Housing extends Property{
     
     int Value;
    
@@ -71,10 +71,11 @@ public class Housing {
         return Value;
     }
     
-    public void displayValue(){
-        for(int i=0;i<3;i++){
+    /*public void setValue(){
+        if(p instanceof House){
+        for(int i=0;i<24;i++){
             System.out.println("The value of the property is "+ HousePrice[i][2]);
-        }
+        }}
     }
-    
+    */
 }

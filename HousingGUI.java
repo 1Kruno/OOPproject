@@ -13,6 +13,33 @@ import javax.swing.JOptionPane;
  */
 public class HousingGUI extends javax.swing.JFrame {
 
+    
+    
+    Property p;
+    
+    public static int[][] HousePrice = { {1, 1923, 2399, 2966},
+                               {2, 2193, 2606, 3102},
+                               {3, 1832, 2129, 2434},
+                               {4, 2244, 2571, 2878},
+                               {5, 1644, 1923, 2117},
+                               {6, 2040, 2386, 2627},
+                               {61, 1807, 2114, 2327},
+                               {7, 1781, 2083, 2294},
+                               {8, 1874, 2191, 2413},
+                               {9, 1658, 1939, 2135},
+                               {10, 1526, 1785, 1965},
+                               {11, 1551, 1814, 1997},
+                               {12, 1637, 1915, 2108},
+                               {13, 1620, 1895, 2086},
+                               {14, 1788, 2092, 2303},
+                               {15, 1504, 1759, 1936},
+                               {16, 1633, 1910, 2103},
+                               {17, 1558, 1823, 2007},
+                               {18, 1809, 2115, 2329},
+                               {20, 1631, 1907, 2100},
+                               {22, 1473, 1723, 1897},
+                               {24, 1507, 1763, 1941},   
+    };
     /**
      * Creates new form HousingGUI
      */
@@ -35,6 +62,8 @@ public class HousingGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btngetprice = new javax.swing.JButton();
+        cmbhousebeds = new javax.swing.JComboBox<>();
+        cmbapartmentbeds = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,47 +95,75 @@ public class HousingGUI extends javax.swing.JFrame {
             }
         });
 
+        cmbhousebeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2 beds", "3 beds", "4 beds" }));
+        cmbhousebeds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbhousebedsActionPerformed(evt);
+            }
+        });
+
+        cmbapartmentbeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Studio", "2 beds", "3 beds" }));
+        cmbapartmentbeds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbapartmentbedsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cmbarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(61, 61, 61))
-                        .addComponent(cmbproperty, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(105, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btngetprice)
+                .addGap(130, 130, 130))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(178, 178, 178))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btngetprice)
-                        .addGap(130, 130, 130))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbapartmentbeds, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel3)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(38, 38, 38)
-                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbhousebeds, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(cmbproperty))
+                .addGap(1, 1, 1)
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(cmbarea))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(58, 58, 58)
                 .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,16 +171,22 @@ public class HousingGUI extends javax.swing.JFrame {
 
     private void cmbpropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbpropertyActionPerformed
         // TODO add your handling code here:
+            
          if(cmbproperty.getSelectedItem().equals("House"))
         {
-             Property House = new Property(); 
+            cmbhousebeds.setVisible(true);
+            cmbapartmentbeds.setVisible(false);
+             p = new House(); 
              JOptionPane.showMessageDialog(null, "You are looking for a house to rent");
         }
-        else
+         else if(cmbproperty.getSelectedItem().equals("Apartment"))
         {
-              Property Apartment  = new Property();
+            cmbhousebeds.setVisible(false);
+            cmbapartmentbeds.setVisible(true);
+              p = new Apartment();
               JOptionPane.showMessageDialog(null, "You are looking for an apartment to rent");
         }
+         else{JOptionPane.showMessageDialog(null, "Please select on of the options");}
     }//GEN-LAST:event_cmbpropertyActionPerformed
 
     private void cmbareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbareaActionPerformed
@@ -144,14 +207,55 @@ public class HousingGUI extends javax.swing.JFrame {
 
     private void btngetpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngetpriceActionPerformed
         // TODO add your handling code here:
-        
+        if(p instanceof House){
+            p = new House();
+            System.out.println("h");
+        }
+        if(p instanceof Apartment){
+            p = new Apartment();
+            System.out.println("ap");
+        }
     }//GEN-LAST:event_btngetpriceActionPerformed
+
+    private void cmbhousebedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbhousebedsActionPerformed
+        // TODO add your handling code here:
+        
+        if(cmbhousebeds.getSelectedItem().equals("2 beds")){
+            JOptionPane.showMessageDialog(null, "You selected 2 beds");
+        }
+        else if(cmbhousebeds.getSelectedItem().equals("3 beds")){
+            JOptionPane.showMessageDialog(null, "You selected 3 beds");
+        }
+        else if(cmbhousebeds.getSelectedItem().equals("4 beds")){
+            JOptionPane.showMessageDialog(null, "You selected 4 beds");
+        }
+        else{JOptionPane.showMessageDialog(null, "Please select number of rooms");
+        }
+    }//GEN-LAST:event_cmbhousebedsActionPerformed
+
+    private void cmbapartmentbedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbapartmentbedsActionPerformed
+        // TODO add your handling code here:
+        if(cmbapartmentbeds.getSelectedItem().equals("Studio")){
+            JOptionPane.showMessageDialog(null, "You selected studio");
+        }
+        else if(cmbapartmentbeds.getSelectedItem().equals("2 beds")){
+            JOptionPane.showMessageDialog(null, "You selected 2 beds");
+        }
+        else if(cmbapartmentbeds.getSelectedItem().equals("3 beds")){
+            JOptionPane.showMessageDialog(null, "You selected 3 beds");
+        }
+        else{JOptionPane.showMessageDialog(null, "Please select number of rooms");
+        }
+       
+    }//GEN-LAST:event_cmbapartmentbedsActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -178,13 +282,16 @@ public class HousingGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HousingGUI().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btngetprice;
+    private javax.swing.JComboBox<String> cmbapartmentbeds;
     private javax.swing.JComboBox<String> cmbarea;
+    private javax.swing.JComboBox<String> cmbhousebeds;
     private javax.swing.JComboBox<String> cmbproperty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -11,7 +11,13 @@ package housingapp;
  */
 public class House extends Property{
     
+    public House(){
+        
+    }
     
+    public House(int noOfBeds, int noOfToilets){
+        super();
+    }
     
     
 }

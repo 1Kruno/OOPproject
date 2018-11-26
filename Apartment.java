@@ -11,24 +11,18 @@ package housingapp;
  */
 public class Apartment extends Property{
     
-    int floor;
     
-    public Apartment(int xnoOfBeds, int xnoOfToilets, int floor){
+    
+    public Apartment(int xnoOfBeds, int xnoOfToilets){
         super(xnoOfBeds,xnoOfToilets);
-        floor = 0;
+        
     }
     
     public Apartment(){
         super();
     }
 
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
+   
     
     
     

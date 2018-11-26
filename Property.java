@@ -11,10 +11,10 @@ import java.io.Serializable;
  *
  * @author x18100252
  */
-public class Property implements Serializable{
+public abstract class Property implements Serializable{
    
-    int noOfBeds;
-    int noOfToilets;
+    protected int noOfToilets;
+    protected int noOfBeds;
     
     public Property(){
         noOfBeds = 0;
