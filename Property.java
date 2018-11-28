@@ -11,19 +11,24 @@ import java.io.Serializable;
  *
  * @author x18100252
  */
-public abstract class Property implements Serializable{
+public class Property extends HousingGUI implements Serializable{
    
     protected int noOfToilets;
     protected int noOfBeds;
+    protected String Area;
+    protected int price;
+
     
     public Property(){
         noOfBeds = 0;
-        noOfToilets = 0;
+        noOfToilets = 1;
+        Area = "";
     }
     
-    public Property(int xnoOfBeds, int xnoOfToilets){
-        this.noOfBeds = xnoOfBeds;
-        this.noOfToilets = xnoOfToilets;
+    public Property(int noOfBeds, int noOfToilets, String Area){
+        this.noOfBeds = noOfBeds;
+        this.noOfToilets = noOfToilets;
+        this.Area = Area;
     }
 
     public int getNoOfBeds() {
@@ -41,7 +46,29 @@ public abstract class Property implements Serializable{
     public void setNoOfToilets(int noOfToilets) {
         this.noOfToilets = noOfToilets;
     }
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String Area) {
+        this.Area = Area;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
     
     
+    
+    public String printDetails()
+    {
+        return "Property search details"+","+noOfBeds+","+noOfToilets+",";
+    }
+   
     
 }

@@ -11,12 +11,21 @@ package housingapp;
  */
 public class House extends Property{
     
+    
     public House(){
-        
+        super();
     }
     
-    public House(int noOfBeds, int noOfToilets){
-        super();
+    public House(String Area, int noOfBeds, int noOfToilets){
+        super(noOfBeds, noOfToilets, Area);
+        this.Area = Area;
+    }
+
+  
+    @Override
+    public String printDetails()
+    {
+        return "Property search details"+","+noOfBeds+","+noOfToilets+","+Area;
     }
     
     

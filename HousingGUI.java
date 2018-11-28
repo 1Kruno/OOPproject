@@ -5,18 +5,40 @@
  */
 package housingapp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author x18100252
  */
-public class HousingGUI extends javax.swing.JFrame {
+public class HousingGUI extends javax.swing.JFrame implements Serializable{
 
     
     
     Property p;
+    int noOfBeds;
+    int noOfToilets;
+    String theArea;
+    int price;
     
+    ArrayList <Property> property = new ArrayList();
+    ArrayList <Property> pList = new ArrayList();
+    
+    public static String[] Area = {"Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6",
+                     "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11",
+                     "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17",
+                     "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" };
+        
+    
+       //area,2 bed house, 3 bed house, 4 bed house
     public static int[][] HousePrice = { {1, 1923, 2399, 2966},
                                {2, 2193, 2606, 3102},
                                {3, 1832, 2129, 2434},
@@ -40,11 +62,42 @@ public class HousingGUI extends javax.swing.JFrame {
                                {22, 1473, 1723, 1897},
                                {24, 1507, 1763, 1941},   
     };
+    
+    public static int[][] ApartmentPrice = { {1, 1585, 1895, 2300},
+                               {2, 1834, 2250, 2602},
+                               {3, 1553, 1850, 2034},
+                               {4, 1981, 2383, 2778},
+                               {5, 1426, 1623, 1917},
+                               {6, 1770, 1886, 2127},
+                               {61, 1567, 1814, 2027},
+                               {7, 1545, 1783, 1994},
+                               {8, 1625, 1891, 2013},
+                               {9, 1438, 1739, 1935},
+                               {10, 1324, 1585, 1965},
+                               {11, 1345, 1414, 1797},
+                               {12, 1420, 1615, 1808},
+                               {13, 1405, 1595, 1886},
+                               {14, 1551, 1792, 2003},
+                               {15, 1304, 1659, 1936},
+                               {16, 1416, 1710, 2003},
+                               {17, 1352, 1523, 2007},
+                               {18, 1569, 2015, 2329},
+                               {20, 1414, 1707, 2100},
+                               {22, 1278, 1523, 1897},
+                               {24, 1307, 1663, 1939},
+            
+        
+    };
     /**
      * Creates new form HousingGUI
      */
     public HousingGUI() {
         initComponents();
+        cmbhousebeds.setVisible(false);
+        cmbapartmentbeds.setVisible(false);
+        lblhousebed.setVisible(false);
+        lblaprtmentbed.setVisible(false);
+        
     }
 
     /**
@@ -57,15 +110,25 @@ public class HousingGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         cmbproperty = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lbltitle = new javax.swing.JLabel();
         cmbarea = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblproperty = new javax.swing.JLabel();
+        lblarea = new javax.swing.JLabel();
         btngetprice = new javax.swing.JButton();
         cmbhousebeds = new javax.swing.JComboBox<>();
         cmbapartmentbeds = new javax.swing.JComboBox<>();
+        cmbnoOfToilets = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        lblhousebed = new javax.swing.JLabel();
+        lblaprtmentbed = new javax.swing.JLabel();
+        lbltoilet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(600, 500));
+        setMinimumSize(new java.awt.Dimension(600, 500));
+        setPreferredSize(new java.awt.Dimension(600, 500));
+        setResizable(false);
+        setSize(new java.awt.Dimension(600, 500));
 
         cmbproperty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "House", "Apartment" }));
         cmbproperty.addActionListener(new java.awt.event.ActionListener() {
@@ -74,8 +137,8 @@ public class HousingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Housing App");
+        lbltitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbltitle.setText("Housing App");
 
         cmbarea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6", "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11", "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17", "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" }));
         cmbarea.addActionListener(new java.awt.event.ActionListener() {
@@ -84,11 +147,12 @@ public class HousingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Property type");
+        lblproperty.setText("Property type");
 
-        jLabel3.setText("Area");
+        lblarea.setText("Area");
 
         btngetprice.setText("Get average price");
+        btngetprice.setPreferredSize(null);
         btngetprice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btngetpriceActionPerformed(evt);
@@ -96,6 +160,9 @@ public class HousingGUI extends javax.swing.JFrame {
         });
 
         cmbhousebeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2 beds", "3 beds", "4 beds" }));
+        cmbhousebeds.setMaximumSize(new java.awt.Dimension(119, 39));
+        cmbhousebeds.setMinimumSize(new java.awt.Dimension(119, 39));
+        cmbhousebeds.setPreferredSize(new java.awt.Dimension(119, 39));
         cmbhousebeds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbhousebedsActionPerformed(evt);
@@ -103,67 +170,119 @@ public class HousingGUI extends javax.swing.JFrame {
         });
 
         cmbapartmentbeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Studio", "2 beds", "3 beds" }));
+        cmbapartmentbeds.setMaximumSize(new java.awt.Dimension(119, 39));
+        cmbapartmentbeds.setMinimumSize(new java.awt.Dimension(119, 39));
+        cmbapartmentbeds.setName(""); // NOI18N
+        cmbapartmentbeds.setPreferredSize(new java.awt.Dimension(119, 39));
         cmbapartmentbeds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbapartmentbedsActionPerformed(evt);
             }
         });
 
+        cmbnoOfToilets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Toilet", "2 Toilets" }));
+        cmbnoOfToilets.setMaximumSize(new java.awt.Dimension(119, 39));
+        cmbnoOfToilets.setMinimumSize(new java.awt.Dimension(119, 39));
+        cmbnoOfToilets.setName(""); // NOI18N
+        cmbnoOfToilets.setPreferredSize(new java.awt.Dimension(119, 39));
+        cmbnoOfToilets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbnoOfToiletsActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Review search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblhousebed.setText("Number of bedrooms");
+
+        lblaprtmentbed.setText("Number of bedrooms");
+        lblaprtmentbed.setPreferredSize(new java.awt.Dimension(120, 14));
+
+        lbltoilet.setText("Number of toilets");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbproperty, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(cmbnoOfToilets, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(21, 21, 21)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(202, 202, 202))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblarea)
+                        .addGap(281, 281, 281))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btngetprice)
-                .addGap(130, 130, 130))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbapartmentbeds, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(jLabel3)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblproperty)
+                        .addGap(257, 257, 257))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbltitle)
+                        .addGap(235, 235, 235))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(lblhousebed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblaprtmentbed, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(lbltoilet)
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbhousebeds, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(cmbproperty))
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(cmbarea))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
                 .addGap(58, 58, 58)
-                .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(lbltitle)
+                .addGap(18, 18, 18)
+                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblproperty)
+                .addGap(20, 20, 20)
+                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblarea)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbnoOfToilets, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblhousebed)
+                    .addComponent(lbltoilet)
+                    .addComponent(lblaprtmentbed, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,30 +295,70 @@ public class HousingGUI extends javax.swing.JFrame {
         {
             cmbhousebeds.setVisible(true);
             cmbapartmentbeds.setVisible(false);
+            lblhousebed.setVisible(true);
+            lblaprtmentbed.setVisible(false);
              p = new House(); 
-             JOptionPane.showMessageDialog(null, "You are looking for a house to rent");
+             //JOptionPane.showMessageDialog(null, "You are looking for a house to rent");
         }
          else if(cmbproperty.getSelectedItem().equals("Apartment"))
         {
             cmbhousebeds.setVisible(false);
             cmbapartmentbeds.setVisible(true);
+            lblaprtmentbed.setVisible(true);
+            lblhousebed.setVisible(false);
               p = new Apartment();
-              JOptionPane.showMessageDialog(null, "You are looking for an apartment to rent");
+              //JOptionPane.showMessageDialog(null, "You are looking for an apartment to rent");
         }
          else{JOptionPane.showMessageDialog(null, "Please select on of the options");}
     }//GEN-LAST:event_cmbpropertyActionPerformed
 
+    private void writeToFile(){
+    try{
+	File f = new File("output.dat");
+	FileOutputStream fStream = new FileOutputStream(f, true);
+        ObjectOutputStream oStream = new ObjectOutputStream(fStream);
+        oStream.writeObject(pList);
+        oStream.close();
+        System.out.println("The Object  was succesfully written to a file");
+    }
+    catch(IOException q)
+    {
+        System.out.println(q);
+    }
+}
+    
+    public void readFromFile()
+    {
+        try{
+            File f = new File("output.dat");
+            FileInputStream is = new FileInputStream(f);
+	    ObjectInputStream ois = new ObjectInputStream(is);
+	    Property p = (Property) ois.readObject();
+            ois.readObject();
+            ois.close();
+            is.close();
+            JOptionPane.showMessageDialog(null,p.toString());
+        /*File f = new File("output.dat");
+	FileInputStream fStream = new FileInputStream(f);
+        ObjectInputStream iStream = new ObjectInputStream(fStream);
+        
+        
+        //property = (ArrayList<Property>)oStream.readObject();
+        //oStream.readObject();
+        iStream.close();
+        */}
+        catch(ClassNotFoundException | IOException e)
+    {
+        System.out.println(e);
+    }
+    }
+    
+    
     private void cmbareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbareaActionPerformed
         // TODO add your handling code here:
-        
-        String[] Area = {"Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6",
-                     "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11",
-                     "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17",
-                     "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" };
-        
-        for(int x=0;x<24;x++){
+      
+        for(int x=0;x<25;x++){
         if(cmbarea.getSelectedItem().equals(Area[x])){
-            JOptionPane.showMessageDialog(null,"The area you have selected is " + Area[x]);
             break;
         }
         }   
@@ -207,47 +366,139 @@ public class HousingGUI extends javax.swing.JFrame {
 
     private void btngetpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngetpriceActionPerformed
         // TODO add your handling code here:
-        if(p instanceof House){
-            p = new House();
-            System.out.println("h");
+        
+         if(cmbproperty.getSelectedItem().equals("House")){
+            if(cmbhousebeds.getSelectedItem().equals("2 beds")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(HousePrice[x][1]);
+                writeToFile();
+                break;
+            }
+            }}
+            else if(cmbhousebeds.getSelectedItem().equals("3 beds")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(HousePrice[x][2]);
+                writeToFile();
+                break;
+            }
+            }}
+            else if(cmbhousebeds.getSelectedItem().equals("4 beds")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(HousePrice[x][3]);
+                writeToFile();
+                break;
         }
-        if(p instanceof Apartment){
-            p = new Apartment();
-            System.out.println("ap");
+    }}}
+          if(cmbproperty.getSelectedItem().equals("Apartment")){
+            if(cmbhousebeds.getSelectedItem().equals("Studio")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(ApartmentPrice[x][1]);
+                writeToFile();
+                break;
+            }
+            }}
+            else if(cmbhousebeds.getSelectedItem().equals("2 beds")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(ApartmentPrice[x][2]);
+                writeToFile();
+                break;
+            }
+            }}
+            else if(cmbhousebeds.getSelectedItem().equals("3 beds")){
+                for(int x=0;x<25;x++){
+                if(cmbarea.getSelectedItem().equals(Area[x])){
+                p.setPrice(ApartmentPrice[x][3]);
+                writeToFile();
+                break;
         }
+    }}}
+         else{}
+        for(Property p:property)
+       {
+          if(cmbnoOfToilets.getSelectedItem().equals("1 Toilet")){
+           JOptionPane.showMessageDialog(null,"Property info: "+cmbproperty.getSelectedItem()+" in "+
+                   cmbarea.getSelectedItem()+ "\n Number of beds "+p.getNoOfBeds()+"\n Number of toilets "
+                   +p.getNoOfToilets()+"\n Average price: €"+p.getPrice() );
+                   pList.add(p);
+                   writeToFile();
+                   break;
+          }
+          else{
+              JOptionPane.showMessageDialog(null,"Property info: "+cmbproperty.getSelectedItem()+" in "+
+                   cmbarea.getSelectedItem()+ "\n Number of beds "+p.getNoOfBeds()+"\n Number of toilets "
+                   +(p.getNoOfToilets()+1)+"\n Average price: €"+(p.getPrice()+100) );
+                   pList.add(p);
+                   writeToFile();
+                   break;
+          }
+         
+       }
+        writeToFile();
     }//GEN-LAST:event_btngetpriceActionPerformed
 
+    
+    
     private void cmbhousebedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbhousebedsActionPerformed
         // TODO add your handling code here:
         
+        int noOfBeds = 1;
+        
         if(cmbhousebeds.getSelectedItem().equals("2 beds")){
-            JOptionPane.showMessageDialog(null, "You selected 2 beds");
+            p.setNoOfBeds(noOfBeds + 1);
+            property.add(p);
         }
         else if(cmbhousebeds.getSelectedItem().equals("3 beds")){
-            JOptionPane.showMessageDialog(null, "You selected 3 beds");
+            p.setNoOfBeds(noOfBeds + 2);
+            property.add(p);
         }
         else if(cmbhousebeds.getSelectedItem().equals("4 beds")){
-            JOptionPane.showMessageDialog(null, "You selected 4 beds");
+            p.setNoOfBeds(noOfBeds + 3);
+            property.add(p);
         }
-        else{JOptionPane.showMessageDialog(null, "Please select number of rooms");
+        else{JOptionPane.showMessageDialog(null, "Please select number of bedrooms");
         }
+        
     }//GEN-LAST:event_cmbhousebedsActionPerformed
 
     private void cmbapartmentbedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbapartmentbedsActionPerformed
         // TODO add your handling code here:
+        
+        int noOfBeds = 1;
+        
         if(cmbapartmentbeds.getSelectedItem().equals("Studio")){
-            JOptionPane.showMessageDialog(null, "You selected studio");
+            p.setNoOfBeds(noOfBeds);
+            property.add(p);
         }
         else if(cmbapartmentbeds.getSelectedItem().equals("2 beds")){
-            JOptionPane.showMessageDialog(null, "You selected 2 beds");
+            p.setNoOfBeds(noOfBeds + 1);
+            property.add(p);
         }
         else if(cmbapartmentbeds.getSelectedItem().equals("3 beds")){
-            JOptionPane.showMessageDialog(null, "You selected 3 beds");
+            p.setNoOfBeds(noOfBeds + 2);
+            property.add(p);
         }
-        else{JOptionPane.showMessageDialog(null, "Please select number of rooms");
+        else{JOptionPane.showMessageDialog(null, "Please select number of bedrooms");
         }
        
     }//GEN-LAST:event_cmbapartmentbedsActionPerformed
+
+    private void cmbnoOfToiletsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnoOfToiletsActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cmbnoOfToiletsActionPerformed
+
+ 
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       readFromFile();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,9 +543,14 @@ public class HousingGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbapartmentbeds;
     private javax.swing.JComboBox<String> cmbarea;
     private javax.swing.JComboBox<String> cmbhousebeds;
+    private javax.swing.JComboBox<String> cmbnoOfToilets;
     private javax.swing.JComboBox<String> cmbproperty;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblaprtmentbed;
+    private javax.swing.JLabel lblarea;
+    private javax.swing.JLabel lblhousebed;
+    private javax.swing.JLabel lblproperty;
+    private javax.swing.JLabel lbltitle;
+    private javax.swing.JLabel lbltoilet;
     // End of variables declaration//GEN-END:variables
 }

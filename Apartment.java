@@ -13,8 +13,8 @@ public class Apartment extends Property{
     
     
     
-    public Apartment(int xnoOfBeds, int xnoOfToilets){
-        super(xnoOfBeds,xnoOfToilets);
+    public Apartment(int xnoOfBeds, int xnoOfToilets, String xArea){
+        super(xnoOfBeds,xnoOfToilets,xArea);
         
     }
     
