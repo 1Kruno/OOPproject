@@ -122,43 +122,67 @@ public class HousingGUI extends javax.swing.JFrame implements Serializable{
         lblhousebed = new javax.swing.JLabel();
         lblaprtmentbed = new javax.swing.JLabel();
         lbltoilet = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(600, 500));
         setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 500));
+        getContentPane().setLayout(null);
 
+        cmbproperty.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         cmbproperty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "House", "Apartment" }));
         cmbproperty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbpropertyActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbproperty);
+        cmbproperty.setBounds(40, 90, 540, 38);
 
-        lbltitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbltitle.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
+        lbltitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltitle.setText("Housing App");
+        getContentPane().add(lbltitle);
+        lbltitle.setBounds(220, 10, 200, 60);
 
+        cmbarea.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         cmbarea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dublin 1", "Dublin 2", "Dublin 3", "Dublin 4", "Dublin 5", "Dublin 6", "Dublin 6w", "Dublin 7", "Dublin 8", "Dublin 9", "Dublin 10", "Dublin 11", "Dublin 12", "Dublin 13", "Dublin 14", "Dublin 15", "Dublin 16", "Dublin 17", "Dublin 18", "Dublin 20", "Dublin 22", "Dublin 24" }));
         cmbarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbareaActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbarea);
+        cmbarea.setBounds(40, 170, 540, 39);
 
+        lblproperty.setBackground(new java.awt.Color(255, 255, 255));
+        lblproperty.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        lblproperty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblproperty.setText("Property type");
+        lblproperty.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(lblproperty);
+        lblproperty.setBounds(260, 130, 110, 17);
 
+        lblarea.setBackground(new java.awt.Color(255, 255, 255));
+        lblarea.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        lblarea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblarea.setText("Area");
+        getContentPane().add(lblarea);
+        lblarea.setBounds(280, 210, 60, 17);
 
+        btngetprice.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         btngetprice.setText("Get average price");
-        btngetprice.setPreferredSize(null);
         btngetprice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btngetpriceActionPerformed(evt);
             }
         });
+        getContentPane().add(btngetprice);
+        btngetprice.setBounds(220, 360, 184, 45);
 
+        cmbhousebeds.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         cmbhousebeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2 beds", "3 beds", "4 beds" }));
         cmbhousebeds.setMaximumSize(new java.awt.Dimension(119, 39));
         cmbhousebeds.setMinimumSize(new java.awt.Dimension(119, 39));
@@ -168,7 +192,10 @@ public class HousingGUI extends javax.swing.JFrame implements Serializable{
                 cmbhousebedsActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbhousebeds);
+        cmbhousebeds.setBounds(40, 250, 140, 39);
 
+        cmbapartmentbeds.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         cmbapartmentbeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Studio", "2 beds", "3 beds" }));
         cmbapartmentbeds.setMaximumSize(new java.awt.Dimension(119, 39));
         cmbapartmentbeds.setMinimumSize(new java.awt.Dimension(119, 39));
@@ -179,7 +206,10 @@ public class HousingGUI extends javax.swing.JFrame implements Serializable{
                 cmbapartmentbedsActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbapartmentbeds);
+        cmbapartmentbeds.setBounds(240, 250, 140, 39);
 
+        cmbnoOfToilets.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         cmbnoOfToilets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Toilet", "2 Toilets" }));
         cmbnoOfToilets.setMaximumSize(new java.awt.Dimension(119, 39));
         cmbnoOfToilets.setMinimumSize(new java.awt.Dimension(119, 39));
@@ -190,100 +220,44 @@ public class HousingGUI extends javax.swing.JFrame implements Serializable{
                 cmbnoOfToiletsActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbnoOfToilets);
+        cmbnoOfToilets.setBounds(440, 250, 140, 39);
 
+        jButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         jButton1.setText("Review search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(20, 410, 140, 38);
 
+        lblhousebed.setBackground(new java.awt.Color(255, 255, 255));
+        lblhousebed.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        lblhousebed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblhousebed.setText("Number of bedrooms");
+        getContentPane().add(lblhousebed);
+        lblhousebed.setBounds(40, 300, 130, 17);
 
+        lblaprtmentbed.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        lblaprtmentbed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblaprtmentbed.setText("Number of bedrooms");
         lblaprtmentbed.setPreferredSize(new java.awt.Dimension(120, 14));
+        getContentPane().add(lblaprtmentbed);
+        lblaprtmentbed.setBounds(230, 300, 140, 14);
 
+        lbltoilet.setBackground(java.awt.Color.white);
+        lbltoilet.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        lbltoilet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltoilet.setText("Number of toilets");
+        getContentPane().add(lbltoilet);
+        lbltoilet.setBounds(440, 300, 120, 17);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbproperty, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(cmbnoOfToilets, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(21, 21, 21)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblarea)
-                        .addGap(281, 281, 281))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblproperty)
-                        .addGap(257, 257, 257))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbltitle)
-                        .addGap(235, 235, 235))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(lblhousebed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblaprtmentbed, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(lbltoilet)
-                .addGap(65, 65, 65))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(lbltitle)
-                .addGap(18, 18, 18)
-                .addComponent(cmbproperty, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblproperty)
-                .addGap(20, 20, 20)
-                .addComponent(cmbarea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblarea)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbnoOfToilets, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbapartmentbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbhousebeds, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblhousebed)
-                    .addComponent(lbltoilet)
-                    .addComponent(lblaprtmentbed, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btngetprice, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\x18100252\\Desktop\\landscape.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 630, 560);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -546,6 +520,7 @@ public class HousingGUI extends javax.swing.JFrame implements Serializable{
     private javax.swing.JComboBox<String> cmbnoOfToilets;
     private javax.swing.JComboBox<String> cmbproperty;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblaprtmentbed;
     private javax.swing.JLabel lblarea;
     private javax.swing.JLabel lblhousebed;
